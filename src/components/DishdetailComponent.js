@@ -31,8 +31,9 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        console.log('Current State is: ' + " Rating:" + values.rating +  " Comment:" + values.message +  " Author:" + values.name);
-        alert('Current State is: ' + " Rating:" + values.rating +  " Comment:" + values.message +  "Author: " + values.name);
+        console.log('Current State is: ' + " Rating:" + values.rating +  " Comment:" + values.comment +  " Author:" + values.name);
+        alert('Current State is: ' + " Rating:" + values.rating +  " Comment:" + values.comment +  "Author: " + values.name);
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -77,9 +78,9 @@ class CommentForm extends Component {
                         </Col>
                     </Row>
                     <Row className="form-group">
-                        <Label htmlFor="message" md={2}>Comment</Label>
+                        <Label htmlFor="comment" md={2}>Comment</Label>
                         <Col md={10}>
-                            <Control.textarea model=".message" id="message" name="message"
+                            <Control.textarea model=".comment" id="comment" name="comment"
                                 rows="6"
                                 className="form-control" />
                         </Col>
@@ -114,7 +115,7 @@ function RenderDish({dish}) {
         );
 }
 
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
     if (comments != null) {
         return (
           <div>
@@ -134,7 +135,7 @@ function RenderComments({comments}) {
                   );
                 })}
             </ul>
-            <CommentForm />
+            <CommentForm dishId={dishId} addComment={addComment} />
           </div>
         );
     }
@@ -161,9 +162,8 @@ const DishDetail = (props) => {
                 <RenderDish dish={props.dish} />
             </div>
             <div className="col-12 col-md-5 m-1">
-                <h4> Comments </h4>
                 <ul className="list-unstyled">
-                  <RenderComments comments={props.comments} />
+                  <RenderComments comments={props.comments}  addComment={props.addComment} dishId={props.dish.id} />
                 </ul>
             </div>
         </div>
