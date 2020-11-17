@@ -42,10 +42,10 @@ function Home(props) {
                   <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrmess}/>
               </div>
               <div className="col-12 col-md m-1">
-                  <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess}/>
+                  <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrmess}/>
               </div>
               <div className="col-12 col-md m-1">
-                  <RenderCard item={props.leader} />
+                  <RenderCard item={props.leader} isLoading={props.leaderLoading} errMess={props.leaderErrmess}/>
               </div>
           </div>
         </div>
